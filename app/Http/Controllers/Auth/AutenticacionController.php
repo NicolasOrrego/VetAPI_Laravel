@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -24,6 +23,7 @@ class AutenticacionController extends Controller
                 'nombres.required' => 'El campo nombres es requerido',
                 'apellidos.required' => 'El campo apellidos es requerido',
                 'email.required' => 'El campo correo es requerido',
+                'email.unique' => 'El email ya esta ocupado',
                 'password.required' => 'El campo contraseña es requerido',
                 'password.confirmed' => 'La contraseña de confirmación no coincide',
                 'correo.unique' => 'El correo ya esta en uso',
@@ -33,7 +33,9 @@ class AutenticacionController extends Controller
         $usuario['password'] = Hash::make($request->password);
         $usuario = User::create($usuario);
 
-        return response($usuario, Response::HTTP_CREATED);
+        return response()->json([
+            'message' => 'Usuario registrado exitosamente',
+            'usuario' => $usuario],200);
     }
 
     //TODO: Iniciar sesión
@@ -51,13 +53,29 @@ class AutenticacionController extends Controller
                 $usuario = Auth::user();
                 $token = $usuario->createToken('token')->plainTextToken;
                 $cookie = cookie('cookie_token', $token, 60 * 24);
-                if ($usuario->roles == 1) {
-                    return response()->json(['message' => 'Te has logeado como administrador', "token" => $token],200);
-                } elseif ($usuario->roles == 2) {
+                if ($usuario->roles == 'Administrador') {
+                    return response()->json(['message' => 'Te has logeado como administrador', "token" => $token, ],200);
+                } elseif ($usuario->roles == 'Funcionario') {
                     return response()->json(['message' => 'Te has logeado como funcionario', "token" => $token],200);
                 } else {
-                    return response()->json(['message' => 'Te has logeado como cliente', "token" => $token],200);                }
+                    return response()->json(['message' => 'Te has logeado como cliente', "token" => $token],200);                
+                }
+            } else {
+                return response()->json(['error' => 'Credenciales inválidas, por favor vuelva a intentarlo.'], 401);
             }
-            return response($usuario, Response::HTTP_UNAUTHORIZED);
+    }
+
+    //TODO: Cerrar sesión
+    public function logoutUsuario(Request $request){
+        if (auth()->check()) {
+            auth()->user()->tokens()->delete();
+            return response()->json([
+                'msg' => 'Acabaste de cerrar sesion con el usuario '.auth()->user()->nombres.' '.auth()->user()->apellidos,
+            ],200);
+        } else {
+            return response()->json([
+                'msg' => 'No hay usuario autenticado'
+            ],401);
+        }
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('apellidos');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('roles')->default(3);
+            $table->string('roles')->default("Cliente");
             $table->timestamps();
         });
     }

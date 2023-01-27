@@ -10,13 +10,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//TODO: RUTA DE REGISTRARSE
-Route::post('/v1/Registrarse', [AutenticacionController::class, 'registerUsuario']);
+//TODO: Ruta de autenticación
 
-//TODO: RUTA DE INICIAR SESION
-Route::post('/v1/Login', [AutenticacionController::class, 'loginUsuario']);
+    //* Registrarse
+    Route::post('/v1/registrarse', [AutenticacionController::class, 'registerUsuario']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    //* Iniciar sesión
+    Route::post('/v1/login', [AutenticacionController::class, 'loginUsuario']);
 
+//TODO: Rutas generales 
+        Route::middleware(['auth:sanctum'])->group(function () {
+
+            //* Cerrar sesión
+            Route::get('/v1/logout', [AutenticacionController::class, 'logoutUsuario']);
+            
+            //TODO: Rutas del usuario adminstrador
+            Route::middleware(['administrador'])->group(function(){
+                Route::get('/v1/administrador', function () {return response()->json(['message' => 'Bievenido Usuario Administrador']);});
+            });  
+
+            //TODO: Rutas del usuario funcionario
+            Route::middleware(['funcionario'])->group(function(){
+                Route::get('/v1/funcionario', function () {return response()->json(['message' => 'Bievenido Usuario Funcionario']);});
+            });
+
+            //TODO: Rutas del usuario cliente
+            Route::middleware(['cliente'])->group(function(){
+                Route::get('/v1/cliente', function () {return response()->json(['message' => 'Bievenido Usuario Cliente']);});
+            });
+        });
+    
