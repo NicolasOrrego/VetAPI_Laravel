@@ -18,7 +18,7 @@ class AdminPacienteController extends Controller
             'especie' => 'required|max:60|string',
             'sexo' => 'required|string|in:Macho,Hembra'
         ], [
-            //! VALIDACIONES DEL USUARIO
+            //! VALIDACIONES
             'id_usuario.required' => 'El campo id_usuario es requerido.',
             'nombre.required' => 'El campo nombre es requerido',
             'especie.required' => 'El campo especie es requerido',
@@ -79,7 +79,7 @@ class AdminPacienteController extends Controller
             'especie' => 'required|max:60|string',
             'sexo' => 'required|string|in:Macho,Hembra'
         ], [
-            //! VALIDACIONES DEL USUARIO
+            //! VALIDACIONES
             'id_usuario.required' => 'El campo id_usuario es requerido.',
             'nombre.required' => 'El campo nombre es requerido',
             'especie.required' => 'El campo especie es requerido',

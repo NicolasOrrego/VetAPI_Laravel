@@ -20,7 +20,7 @@ class UsuarioController extends Controller
             'password_confirmation' => 'required|min:8|string',
             'roles' => 'required|string|in:Administrador,Cliente,Funcionario',
         ], [
-            //! VALIDACIONES DEL USUARIO
+            //! VALIDACIONES
             'nombres.required' => 'El campo nombres es requerido',
             'apellidos.required' => 'El campo apellidos es requerido',
             'email.required' => 'El campo correo es requerido',
@@ -131,7 +131,7 @@ class UsuarioController extends Controller
             'roles' => 'required|string|in:Administrador,Cliente,Funcionario',
             'estado' => 'required|string|in:Habilitado,Deshabilitado'
         ], [
-            //! VALIDACIONES DEL USUARIO
+            //! VALIDACIONES
             'nombres.required' => 'El campo nombres es requerido',
             'apellidos.required' => 'El campo apellidos es requerido',
             'email.required' => 'El campo correo es requerido',

@@ -20,7 +20,7 @@ class AutenticacionController extends Controller
             'email' => 'required|max:60|email|unique:users|string',
             'password' => 'required|min:8|confirmed|string',
         ], [
-            //! VALIDACIONES DEL USUARIO
+            //! VALIDACIONES
             'nombres.required' => 'El campo nombres es requerido',
             'apellidos.required' => 'El campo apellidos es requerido',
             'email.required' => 'El campo correo es requerido',
@@ -47,7 +47,7 @@ class AutenticacionController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ], [
-            //!VALIDACION DE LOGIN
+            //!VALIDACIONES
             'email.required' => 'El campo correo es requerido',
             'password.required' => 'El campo contraseña es requerido',
         ]);

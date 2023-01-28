@@ -13,5 +13,4 @@ class Jaula extends Model
         'dimensiones',
         'material',
     ];
-
 }

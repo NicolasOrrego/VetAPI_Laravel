@@ -15,7 +15,7 @@ class AdminJaulaController extends Controller
             'dimensiones' => 'required|max:30|min:3',
             'material' => 'required|max:60|string',
         ], [
-            //! VALIDACIONES DEL USUARIO
+            //! VALIDACIONES
             'dimensiones.required' => 'El campo dimension es requerido.',
             'material.required' => 'El campo material es requerido',
         ]);
@@ -29,7 +29,7 @@ class AdminJaulaController extends Controller
         ], 200);
     }
 
-    //TODO: Obtener todos las jaulas
+    //TODO: Obtener todas las jaulas
     public function obtenerJaulas(Request $request)
     {
         $jaulas = Jaula::all();
@@ -55,7 +55,7 @@ class AdminJaulaController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Jaula no encontrado'
+                'message' => 'Jaula no encontrada'
             ], 404);
         }
     }
@@ -67,7 +67,7 @@ class AdminJaulaController extends Controller
             'dimensiones' => 'required|max:30|min:3',
             'material' => 'required|max:60|string',
         ], [
-            //! VALIDACIONES DEL USUARIO
+            //! VALIDACIONES
             'dimensiones.required' => 'El campo dimension es requerido.',
             'material.required' => 'El campo material es requerido',
         ]);

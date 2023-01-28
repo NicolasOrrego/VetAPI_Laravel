@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AutenticacionController;
 use App\Http\Controllers\Administrador\Usuario\UsuarioController;
 use App\Http\Controllers\Administrador\Paciente\AdminPacienteController;
 use App\Http\Controllers\Administrador\Jaula\AdminJaulaController;
+use App\Http\Controllers\Administrador\CitaMedica\AdminCitaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -77,7 +78,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         //* Registar jaula
         Route::post('/v1/administrador/registrar/jaula', [AdminJaulaController::class, 'crearJaula']);
 
-        //* Ver todos los jaulas
+        //* Ver todas las jaulas
         Route::get('/v1/administrador/lista/jaulas', [AdminJaulaController::class, 'obtenerJaulas']);
 
         //* Buscar jaula
@@ -88,10 +89,28 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         //* Eliminar jaula
         Route::delete('/v1/administrador/eliminar/jaula/{id}', [AdminJaulaController::class, 'eliminarJaula']);
+
+        //TODO: CRUD cita médica
+        //* Registrar cita médicas
+        Route::post('/v1/administrador/registrar/cita', [AdminCitaController::class, 'crearCita']);
+
+        //* Ver todas las citas médicas
+        Route::get('/v1/administrador/lista/citas', [AdminCitaController::class, 'obtenerCita']);
+
+        //* Buscar cita médica
+        Route::get('/v1/administrador/buscar/cita/{id}', [AdminCitaController::class, 'buscarCita']);
+
+        //* Modificar cita médica
+        Route::put('/v1/administrador/modificar/cita/{id}', [AdminCitaController::class, 'modificarCita']);
+
+        //* Eliminar cita médicas
+        Route::delete('/v1/administrador/eliminar/cita/{id}', [AdminCitaController::class, 'eliminarCita']);
+
+        //TODO: CRUD ficha médica
+
+        //TODO: CRUD registro jaula
+        
     });
-
-    
-
 
     //TODO: Rutas del usuario funcionario
     Route::middleware(['funcionario'])->group(function () {
