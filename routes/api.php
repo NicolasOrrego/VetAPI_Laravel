@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Auth\AutenticacionController;
-use App\Http\Controllers\Administrador\UsuarioController;
+use App\Http\Controllers\Administrador\Usuario\UsuarioController;
+use App\Http\Controllers\Administrador\Paciente\AdminPacienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,22 @@ use Illuminate\Support\Facades\Route;
 
                     //* Eliminar usuario
                     Route::delete('/v1/administrador/eliminar/usuario/{id}', [UsuarioController::class, 'eliminarUsuario']);
+
+                //TODO: CRUD paciente
+                    //* Crear paciente
+                    Route::post('/v1/administrador/registrar/paciente', [AdminPacienteController::class, 'crearPaciente']);
+
+                    //* Ver todos los pacientes
+                    Route::get('/v1/administrador/lista/paciente', [AdminPacienteController::class, 'obtenerPacientes']);
+
+                    //* Buscar paciente
+                    Route::get('/v1/administrador/buscar/paciente/{id}', [AdminPacienteController::class, 'buscarPaciente']);
+
+                    //* Modificar paciente
+                    Route::put('/v1/administrador/modificar/paciente/{id}', [AdminPacienteController::class,'modificarPaciente']);
+
+                    //* Eliminar paciente
+                    Route::delete('/v1/administrador/eliminar/paciente/{id}', [AdminPacienteController::class, 'eliminarPaciente']);
             });  
 
 
