@@ -48,17 +48,22 @@ class AutenticacionController extends Controller
                 'email.required' => 'El campo correo es requerido',
                 'password.required' => 'El campo contraseña es requerido',
             ]);
-
+    
             if (Auth::attempt($validacion_datos)) {
                 $usuario = Auth::user();
-                $token = $usuario->createToken('token')->plainTextToken;
-                $cookie = cookie('cookie_token', $token, 60 * 24);
-                if ($usuario->roles == 'Administrador') {
-                    return response()->json(['message' => 'Te has logeado como administrador', "token" => $token, ],200);
-                } elseif ($usuario->roles == 'Funcionario') {
-                    return response()->json(['message' => 'Te has logeado como funcionario', "token" => $token],200);
-                } else {
-                    return response()->json(['message' => 'Te has logeado como cliente', "token" => $token],200);                
+                if($usuario->estado == 'Habilitado'){
+                    $token = $usuario->createToken('token')->plainTextToken;
+                    $cookie = cookie('cookie_token', $token, 60 * 24);
+                    if ($usuario->roles == 'Administrador') {
+                        return response()->json(['message' => 'Te has logeado como administrador', "token" => $token, ],200);
+                    } elseif ($usuario->roles == 'Funcionario') {
+                        return response()->json(['message' => 'Te has logeado como funcionario', "token" => $token],200);
+                    } else {
+                        return response()->json(['message' => 'Te has logeado como cliente', "token" => $token],200);                
+                    }
+                }
+                else{
+                    return response()->json(['error' => 'La cuenta esta desactivada, por favor contacte al soporte'], 401);
                 }
             } else {
                 return response()->json(['error' => 'Credenciales inválidas, por favor vuelva a intentarlo.'], 401);
