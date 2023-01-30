@@ -6,7 +6,7 @@ use App\Http\Controllers\Administrador\Paciente\AdminPacienteController;
 use App\Http\Controllers\Administrador\Jaula\AdminJaulaController;
 use App\Http\Controllers\Administrador\CitaMedica\AdminCitaController;
 use App\Http\Controllers\Administrador\Ficha\AdminFichaController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Administrador\Registro\AdminRegistroController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -124,7 +124,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/v1/administrador/eliminar/ficha/{id}', [AdminFichaController::class, 'eliminarFicha']);
 
         //TODO: CRUD registro jaula
-        
+        //* Registrar registro jaula
+        Route::post('/v1/administrador/registrar/registro/jaula', [AdminRegistroController::class, 'crearRegistro']);
+
+        //* Ver todas las registros jaula
+        Route::get('/v1/administrador/lista/registro/jaulas', [AdminRegistroController::class, 'obtenerRegistros']);
+
+        //* Buscar registro jaula
+        Route::get('/v1/administrador/buscar/registro/jaula/{id}', [AdminRegistroController::class, 'buscarRegistro']);
+
+        //* Modificar registro jaula
+        Route::put('/v1/administrador/modificar/registro/jaula/{id}', [AdminRegistroController::class,'modificarRegistro']);
+
+        //* Eliminar registro jaula
+        Route::delete('/v1/administrador/eliminar/registro/jaula/{id}', [AdminRegistroController::class, 'eliminarRegistro']);
         
     });
 

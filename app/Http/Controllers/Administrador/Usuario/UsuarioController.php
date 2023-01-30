@@ -54,7 +54,7 @@ class UsuarioController extends Controller
         } else {
             return response()->json([
                 'message' => 'No hay usuarios registrados.'
-            ], 204);
+            ], 200);
         }
     }
 
@@ -69,7 +69,7 @@ class UsuarioController extends Controller
         } else {
             return response()->json([
                 'message' => 'No hay administradores registrados.'
-            ], 404);
+            ], 200);
         }
     }
 
@@ -84,7 +84,7 @@ class UsuarioController extends Controller
         } else {
             return response()->json([
                 'message' => 'No hay funcionarios registrados.'
-            ], 404);
+            ], 200);
         }
     }
 
@@ -99,7 +99,7 @@ class UsuarioController extends Controller
         } else {
             return response()->json([
                 'message' => 'No hay clientes registrados.'
-            ], 404);
+            ], 200);
         }
     }
 
