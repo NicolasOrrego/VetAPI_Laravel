@@ -5,6 +5,7 @@ use App\Http\Controllers\Administrador\Usuario\UsuarioController;
 use App\Http\Controllers\Administrador\Paciente\AdminPacienteController;
 use App\Http\Controllers\Administrador\Jaula\AdminJaulaController;
 use App\Http\Controllers\Administrador\CitaMedica\AdminCitaController;
+use App\Http\Controllers\Administrador\Ficha\AdminFichaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -107,8 +108,23 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/v1/administrador/eliminar/cita/{id}', [AdminCitaController::class, 'eliminarCita']);
 
         //TODO: CRUD ficha médica
+        //* Registrar ficha médicas
+        Route::post('/v1/administrador/registrar/ficha', [AdminFichaController::class, 'crearFicha']);
+
+        //* Ver todas las fichas médicas
+        Route::get('/v1/administrador/lista/fichas', [AdminFichaController::class, 'obtenerFichas']);
+
+        //* Buscar ficha médica
+        Route::get('/v1/administrador/buscar/ficha/{id}', [AdminFichaController::class, 'buscarFicha']);
+
+        //* Modificar ficha médica
+        Route::put('/v1/administrador/modificar/ficha/{id}', [AdminFichaController::class,'modificarFicha']);
+
+        //* Eliminar ficha médica
+        Route::delete('/v1/administrador/eliminar/ficha/{id}', [AdminFichaController::class, 'eliminarFicha']);
 
         //TODO: CRUD registro jaula
+        
         
     });
 
