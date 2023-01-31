@@ -2,15 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AutenticacionController;
+use App\Http\Controllers\Cliente\Cita\ClientCitaController;
+use App\Http\Controllers\Cliente\Usuario\ClienteController;
+use App\Http\Controllers\Cliente\Ficha\ClientFichaController;
 use App\Http\Controllers\Funcionario\Ficha\FunFichaController;
 use App\Http\Controllers\Administrador\Usuario\UsuarioController;
 use App\Http\Controllers\Administrador\Ficha\AdminFichaController;
 use App\Http\Controllers\Administrador\Jaula\AdminJaulaController;
+use App\Http\Controllers\Cliente\Paciente\ClientPacienteController;
+use App\Http\Controllers\Funcionario\Regitro\FunRegistroController;
 use App\Http\Controllers\Funcionario\Paciente\FunPacienteController;
 use App\Http\Controllers\Administrador\CitaMedica\AdminCitaController;
 use App\Http\Controllers\Administrador\Paciente\AdminPacienteController;
 use App\Http\Controllers\Administrador\Registro\AdminRegistroController;
-use App\Http\Controllers\Funcionario\Regitro\FunRegistroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +46,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/v1/administrador/registrar/usuario', [UsuarioController::class, 'crearUsuario']);
 
         //* Ver todos los usuarios
-        Route::get('/v1/administrador/lista/usuario', [UsuarioController::class, 'obtenerUsuarios']);
+        Route::get('/v1/administrador/lista/usuarios', [UsuarioController::class, 'obtenerUsuarios']);
 
         //* Ver todos los usuarios administradores
         Route::get('/v1/administrador/lista/administradores/usuarios', [UsuarioController::class, 'usuariosAdministrador']);
@@ -204,29 +208,36 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return response()->json(['message' => 'Bievenido Usuario Cliente']);
         });
 
+        //TODO: Usuario
+        //* Ver informacion personal
+        Route::get('/v1/cliente/informacion', [ClienteController::class, 'informacionPersonal']);
+
+        //* Modificar información personal
+        Route::put('/v1/cliente/modificar/informacion', [ClienteController::class, 'modificarInformacion']);
+
+        //* Deshabilitar cuenta
+        Route::put('/v1/cliente/deshabilitar/cuenta', [ClienteController::class, 'deshabilitarCuenta']);
+
         //TODO: Paciente
         //* Registrar paciente
-        Route::post('/v1/cliente/registrar/paciente', [FunPacienteController::class, 'crearPaciente']);
+        Route::post('/v1/cliente/registrar/paciente', [ClientPacienteController::class, 'crearPaciente']);
 
         //* Modificar paciente
-        Route::put('/v1/cliente/modificar/paciente/{id}', [FunPacienteController::class, 'modificarPaciente']);
-
-        //* Eliminar paciente
-        Route::delete('/v1/cliente/eliminar/paciente/{id}', [FunPacienteController::class, 'eliminarPaciente']);
+        Route::put('/v1/cliente/modificar/paciente/{id}', [ClientPacienteController::class, 'modificarPaciente']);
 
         //TODO: Ficha Médica
         //* ver ficha médica
-        Route::get('/v1/cliente/buscar/ficha/{id}', [FunFichaController::class, 'verFicha']);
+        Route::get('/v1/cliente/buscar/ficha/{id}', [ClientFichaController::class, 'verFicha']);
 
         //TODO: CRUD cita médica
         //* Registrar cita médicas
-        Route::post('/v1/cliente/registrar/cita', [AdminCitaController::class, 'crearCita']);
+        Route::post('/v1/cliente/registrar/cita', [ClientCitaController::class, 'crearCita']);
 
         //* Ver cita médica
-        Route::get('/v1/cliente/buscar/ficha/{id}', [FunFichaController::class, 'verFicha']);
+        Route::get('/v1/cliente/buscar/ficha/{id}', [ClientCitaController::class, 'verFicha']);
 
         //* Modificar cita médica
-        Route::put('/v1/cliente/modificar/cita/{id}', [AdminCitaController::class, 'modificarCita']);
+        Route::put('/v1/cliente/modificar/cita/{id}', [ClientCitaController::class, 'modificarCita']);
 
         //* Eliminar cita médicas
         Route::delete('/v1/cliente/eliminar/cita/{id}', [AdminCitaController::class, 'eliminarCita']);
