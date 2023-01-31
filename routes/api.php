@@ -195,7 +195,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/v1/funcionario/modificar/registro/jaula/{id}', [FunRegistroController::class, 'modificarRegistro']);
 
         //* Eliminar registro jaula
-        Route::delete('/v1/adminfuncionarioistrador/eliminar/registro/jaula/{id}', [FunRegistroController::class, 'eliminarRegistro']);
+        Route::delete('/v1/funcionario/eliminar/registro/jaula/{id}', [FunRegistroController::class, 'eliminarRegistro']);
     });
 
     //TODO: Rutas del usuario cliente

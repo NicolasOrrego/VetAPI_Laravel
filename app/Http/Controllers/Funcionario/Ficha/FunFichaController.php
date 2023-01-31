@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Funcionario\Ficha;
 
-use App\Models\User;
 use App\Models\Ficha;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
