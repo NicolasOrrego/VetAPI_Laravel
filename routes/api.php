@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\Auth\AutenticacionController;
-use App\Http\Controllers\Administrador\Usuario\UsuarioController;
-use App\Http\Controllers\Administrador\Paciente\AdminPacienteController;
-use App\Http\Controllers\Administrador\Jaula\AdminJaulaController;
-use App\Http\Controllers\Administrador\CitaMedica\AdminCitaController;
-use App\Http\Controllers\Administrador\Ficha\AdminFichaController;
-use App\Http\Controllers\Administrador\Registro\AdminRegistroController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AutenticacionController;
+use App\Http\Controllers\Funcionario\Ficha\FunFichaController;
+use App\Http\Controllers\Administrador\Usuario\UsuarioController;
+use App\Http\Controllers\Administrador\Ficha\AdminFichaController;
+use App\Http\Controllers\Administrador\Jaula\AdminJaulaController;
+use App\Http\Controllers\Funcionario\Paciente\FunPacienteController;
+use App\Http\Controllers\Administrador\CitaMedica\AdminCitaController;
+use App\Http\Controllers\Administrador\Paciente\AdminPacienteController;
+use App\Http\Controllers\Administrador\Registro\AdminRegistroController;
+use App\Http\Controllers\Funcionario\Regitro\FunRegistroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,7 +121,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/v1/administrador/buscar/ficha/{id}', [AdminFichaController::class, 'buscarFicha']);
 
         //* Modificar ficha médica
-        Route::put('/v1/administrador/modificar/ficha/{id}', [AdminFichaController::class,'modificarFicha']);
+        Route::put('/v1/administrador/modificar/ficha/{id}', [AdminFichaController::class, 'modificarFicha']);
 
         //* Eliminar ficha médica
         Route::delete('/v1/administrador/eliminar/ficha/{id}', [AdminFichaController::class, 'eliminarFicha']);
@@ -134,11 +137,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/v1/administrador/buscar/registro/jaula/{id}', [AdminRegistroController::class, 'buscarRegistro']);
 
         //* Modificar registro jaula
-        Route::put('/v1/administrador/modificar/registro/jaula/{id}', [AdminRegistroController::class,'modificarRegistro']);
+        Route::put('/v1/administrador/modificar/registro/jaula/{id}', [AdminRegistroController::class, 'modificarRegistro']);
 
         //* Eliminar registro jaula
         Route::delete('/v1/administrador/eliminar/registro/jaula/{id}', [AdminRegistroController::class, 'eliminarRegistro']);
-        
     });
 
     //TODO: Rutas del usuario funcionario
@@ -146,6 +148,51 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/v1/funcionario', function () {
             return response()->json(['message' => 'Bievenido Usuario Funcionario']);
         });
+
+        //TODO: Ficha Médica
+        //* Registrar ficha médicas
+        Route::post('/v1/funcionario/registrar/ficha', [FunFichaController::class, 'crearFicha']);
+
+        //* Ver todas las fichas médicas
+        Route::get('/v1/funcionario/lista/fichas', [FunFichaController::class, 'obtenerFichas']);
+
+        //* Buscar ficha médica
+        Route::get('/v1/funcionario/buscar/ficha/{id}', [FunFichaController::class, 'buscarFicha']);
+
+        //* Modificar ficha médica
+        Route::put('/v1/funcionario/modificar/ficha/{id}', [FunFichaController::class, 'modificarFicha']);
+
+        //* Eliminar ficha médica
+        Route::delete('/v1/funcionario/eliminar/ficha/{id}', [FunFichaController::class, 'eliminarFicha']);
+
+        //TODO: Paciente
+        //* Registrar paciente
+        Route::post('/v1/funcionario/registrar/paciente', [FunPacienteController::class, 'crearPaciente']);
+
+        //* Ver todos los pacientes
+        Route::get('/v1/funcionario/lista/pacientes', [FunPacienteController::class, 'obtenerPacientes']);
+
+        //* Buscar paciente
+        Route::get('/v1/funcionario/buscar/paciente/{id}', [FunPacienteController::class, 'buscarPaciente']);
+
+        //* Modificar paciente
+        Route::put('/v1/funcionario/modificar/paciente/{id}', [FunPacienteController::class, 'modificarPaciente']);
+
+        //TODO: Registro jaula
+        //* Registrar registro jaula
+        Route::post('/v1/funcionario/registrar/registro/jaula', [FunRegistroController::class, 'crearRegistro']);
+
+        //* Ver todas las registros jaula
+        Route::get('/v1/funcionario/lista/registro/jaulas', [FunRegistroController::class, 'obtenerRegistros']);
+
+        //* Buscar registro jaula
+        Route::get('/v1/funcionario/buscar/registro/jaula/{id}', [FunRegistroController::class, 'buscarRegistro']);
+
+        //* Modificar registro jaula
+        Route::put('/v1/funcionario/modificar/registro/jaula/{id}', [FunRegistroController::class, 'modificarRegistro']);
+
+        //* Eliminar registro jaula
+        Route::delete('/v1/adminfuncionarioistrador/eliminar/registro/jaula/{id}', [FunRegistroController::class, 'eliminarRegistro']);
     });
 
     //TODO: Rutas del usuario cliente
