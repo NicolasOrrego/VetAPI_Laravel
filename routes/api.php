@@ -203,5 +203,32 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/v1/cliente', function () {
             return response()->json(['message' => 'Bievenido Usuario Cliente']);
         });
+
+        //TODO: Paciente
+        //* Registrar paciente
+        Route::post('/v1/cliente/registrar/paciente', [FunPacienteController::class, 'crearPaciente']);
+
+        //* Modificar paciente
+        Route::put('/v1/cliente/modificar/paciente/{id}', [FunPacienteController::class, 'modificarPaciente']);
+
+        //* Eliminar paciente
+        Route::delete('/v1/cliente/eliminar/paciente/{id}', [FunPacienteController::class, 'eliminarPaciente']);
+
+        //TODO: Ficha Médica
+        //* ver ficha médica
+        Route::get('/v1/cliente/buscar/ficha/{id}', [FunFichaController::class, 'verFicha']);
+
+        //TODO: CRUD cita médica
+        //* Registrar cita médicas
+        Route::post('/v1/cliente/registrar/cita', [AdminCitaController::class, 'crearCita']);
+
+        //* Ver cita médica
+        Route::get('/v1/cliente/buscar/ficha/{id}', [FunFichaController::class, 'verFicha']);
+
+        //* Modificar cita médica
+        Route::put('/v1/cliente/modificar/cita/{id}', [AdminCitaController::class, 'modificarCita']);
+
+        //* Eliminar cita médicas
+        Route::delete('/v1/cliente/eliminar/cita/{id}', [AdminCitaController::class, 'eliminarCita']);
     });
 });
