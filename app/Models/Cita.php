@@ -17,6 +17,7 @@ class Cita extends Model
     ];
 
     public function usuarios(){
-        return $this->belongsTo(User::class, 'Id_Usuario');
+        return $this->belongsTo(User::class, 'id_usuario');
     }
+
 }

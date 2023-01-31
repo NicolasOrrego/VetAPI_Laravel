@@ -48,7 +48,8 @@ class FunRegistroController extends Controller
     //TODO: Obtener registros de jaulas
     public function obtenerRegistros(Request $request)
     {
-        $rjaulas = Rjaula::all();
+        $usuario = auth()->user();
+        $rjaulas = Rjaula::where('id_usuario', $usuario->id)->get();
         if ($rjaulas->count() > 0) {
             return response()->json([
                 'rjaulas' => $rjaulas

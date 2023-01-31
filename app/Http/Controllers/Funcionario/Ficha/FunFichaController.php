@@ -42,7 +42,8 @@ class FunFichaController extends Controller
     //TODO: Obtener todas las fichas médicas
     public function obtenerFichas(Request $request)
     {
-        $fichas = Ficha::all();
+        $usuario = auth()->user();
+        $fichas = Ficha::where('id_usuario', $usuario->id)->get();
         if ($fichas->count() > 0) {
             return response()->json([
                 'fichas' => $fichas
@@ -54,21 +55,26 @@ class FunFichaController extends Controller
         }
     }
 
-    //TODO: Buscar fichas médicas
     public function buscarFicha(Request $request, $id)
     {
         $ficha = Ficha::find($id);
-        if ($ficha) {
-            return response()->json([
-                'message' => 'Ficha médica encontrada',
-                'Ficha' => $ficha
-            ], 200);
-        } else {
+        $usuario = auth()->user();
+        if (!$ficha) {
             return response()->json([
                 'message' => 'Ficha médica no encontrada'
             ], 404);
         }
+        if ($ficha->id_usuario !== $usuario->id) {
+            return response()->json([
+                'message' => 'La ficha médica buscada no pertenece al usuario autenticado'
+            ], 403);
+        }
+        return response()->json([
+            'message' => 'Ficha médica encontrada',
+            'Ficha' => $ficha
+        ], 200);
     }
+
 
     //TODO: Modificar ficha médica
     public function modificarFicha(Request $request, $id)

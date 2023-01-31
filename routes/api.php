@@ -222,19 +222,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
         //* Registrar paciente
         Route::post('/v1/cliente/registrar/paciente', [ClientPacienteController::class, 'crearPaciente']);
 
+        //* Obtener paciente
+        Route::get('/v1/cliente/lista/pacientes', [ClientPacienteController::class, 'obtenerPacientes']);
+
         //* Modificar paciente
         Route::put('/v1/cliente/modificar/paciente/{id}', [ClientPacienteController::class, 'modificarPaciente']);
-
-        //TODO: Ficha Médica
-        //* ver ficha médica
-        Route::get('/v1/cliente/buscar/ficha/{id}', [ClientFichaController::class, 'verFicha']);
 
         //TODO: CRUD cita médica
         //* Registrar cita médicas
         Route::post('/v1/cliente/registrar/cita', [ClientCitaController::class, 'crearCita']);
 
         //* Ver cita médica
-        Route::get('/v1/cliente/buscar/ficha/{id}', [ClientCitaController::class, 'verFicha']);
+        Route::get('/v1/cliente/lista/citas', [ClientCitaController::class, 'obtenerCita']);
+
+         //* Buscar cita médica
+         Route::get('/v1/cliente/buscar/cita/{id}', [ClientCitaController::class, 'buscarCita']);
 
         //* Modificar cita médica
         Route::put('/v1/cliente/modificar/cita/{id}', [ClientCitaController::class, 'modificarCita']);
