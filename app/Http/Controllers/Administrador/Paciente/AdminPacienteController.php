@@ -31,6 +31,9 @@ class AdminPacienteController extends Controller
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
         }
+        if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
+        }
         $paciente = Paciente::create($paciente);
         return response()->json([
             'message' => 'Paciente registrado exitosamente',

@@ -178,6 +178,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         //* Modificar paciente
         Route::put('/v1/funcionario/modificar/paciente/{id}', [FunPacienteController::class, 'modificarPaciente']);
 
+        //* Eliminar paciente
+        Route::delete('/v1/funcionario/eliminar/paciente/{id}', [FunPacienteController::class, 'eliminarPaciente']);
+
         //TODO: Registro jaula
         //* Registrar registro jaula
         Route::post('/v1/funcionario/registrar/registro/jaula', [FunRegistroController::class, 'crearRegistro']);
