@@ -28,7 +28,7 @@ class UsuarioController extends Controller
             'password.required' => 'El campo contraseña es requerido',
             'password_confirmation.required' => 'El campo contraseña de confirmacion es requerido',
             'password.confirmed' => 'La contraseña de confirmación no coincide',
-            'correo.unique' => 'El correo ya esta en uso',
+            'email.unique' => 'El correo ya esta en uso',
             'roles.required' => 'El campo rol requerido es requerido',
             'roles.in' => 'El rol seleccionado no es válido. Por favor seleccione entre Administrador, Cliente o Funcionario'
         ]);

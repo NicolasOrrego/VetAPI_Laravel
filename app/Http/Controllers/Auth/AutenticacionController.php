@@ -27,7 +27,8 @@ class AutenticacionController extends Controller
             'email.unique' => 'El email ya esta ocupado',
             'password.required' => 'El campo contraseña es requerido',
             'password.confirmed' => 'La contraseña de confirmación no coincide',
-            'correo.unique' => 'El correo ya esta en uso',
+            'email.unique' => 'El correo ya esta en uso',
+
         ]);
 
         $usuario = $validacion_datos;
