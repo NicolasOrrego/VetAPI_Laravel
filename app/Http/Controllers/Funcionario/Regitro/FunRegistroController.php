@@ -102,6 +102,11 @@ class FunRegistroController extends Controller
         if (!$jaula) {
             return response()->json(['error' => 'La jaula especificada no existe'], 404);
         }
+
+        if ($paciente->id_usuario != $usuario->id) {
+            return response()->json(['error' => 'No tienes permiso para modificar este registro de jaula'], 403);
+        }
+
         $rjaula = $validacion_datos;
         $rjaula = Rjaula::find($id);
         if (!$rjaula) {

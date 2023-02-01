@@ -103,6 +103,9 @@ class FunFichaController extends Controller
             return response()->json(['error' => 'Solo los funcionarios que se encuentren habilitados pueden modificar fichas médicas'], 403);
         }
 
+        if ($ficha->id_usuario != $usuario->id) {
+            return response()->json(['error' => 'No tienes permiso para modificar esta ficha médica'], 403);
+        }
 
         $ficha->update($validacion_datos);
         return response()->json(['message' => 'Ficha médica modificada exitosamente', 'ficha' => $ficha], 200);

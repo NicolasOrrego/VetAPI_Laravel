@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administrador\Administrador\AdministradorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AutenticacionController;
 use App\Http\Controllers\Cliente\Cita\ClientCitaController;
@@ -40,6 +41,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/v1/administrador', function () {
             return response()->json(['message' => 'Bievenido Usuario Administrador']);
         });
+
+        //TODO: Informacion personal
+        //* Ver informacion personal
+        Route::get('/v1/administrador/informacion', [AdministradorController::class, 'informacionPersonal']);
+
+        //* Modificar información personal
+        Route::put('/v1/administrador/modificar/informacion', [AdministradorController::class, 'modificarInformacion']);
+
+        //* Deshabilitar cuenta
+        Route::put('/v1/administrador/deshabilitar/cuenta', [AdministradorController::class, 'deshabilitarCuenta']);
 
         //TODO: CRUD usuario
         //* Crear nuevo usuario
@@ -235,8 +246,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         //* Ver cita médica
         Route::get('/v1/cliente/lista/citas', [ClientCitaController::class, 'obtenerCita']);
 
-         //* Buscar cita médica
-         Route::get('/v1/cliente/buscar/cita/{id}', [ClientCitaController::class, 'buscarCita']);
+        //* Buscar cita médica
+        Route::get('/v1/cliente/buscar/cita/{id}', [ClientCitaController::class, 'buscarCita']);
 
         //* Modificar cita médica
         Route::put('/v1/cliente/modificar/cita/{id}', [ClientCitaController::class, 'modificarCita']);

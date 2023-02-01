@@ -32,8 +32,11 @@ class AdminFichaController extends Controller
         if (!$paciente) {
             return response()->json(['error' => 'El paciente especificado no existe'], 404);
         }
-        if ($usuario->roles !== "Funcionario" || $usuario->estado !== "Habilitado") {
-            return response()->json(['error' => 'Solo los funcionarios que se encuentren habilitados pueden crear fichas médicas'], 403);
+        if ($usuario->roles !== "Funcionario") {
+            return response()->json(['error' => 'El usuario especificado no es funcionario'], 403);
+        }
+        if ($usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario funcionario seleccionado no se encuentra habilitado'], 403);
         }
 
         $ficha = $validacion_datos;
@@ -97,8 +100,11 @@ class AdminFichaController extends Controller
         if (!$paciente) {
             return response()->json(['error' => 'El paciente especificado no existe'], 404);
         }
-        if ($usuario->roles !== "Funcionario" || $usuario->estado !== "Habilitado") {
-            return response()->json(['error' => 'Solo los funcionarios que se encuentren habilitados pueden crear fichas médicas'], 403);
+        if ($usuario->roles !== "Funcionario") {
+            return response()->json(['error' => 'El usuario especificado no es funcionario'], 403);
+        }
+        if ($usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario funcionario seleccionado no se encuentra habilitado'], 403);
         }
 
         $ficha = Ficha::find($id);

@@ -36,6 +36,12 @@ class AdminRegistroController extends Controller
         if (!$paciente) {
             return response()->json(['error' => 'El paciente especificado no existe'], 404);
         }
+        if ($usuario->roles !== "Funcionario") {
+            return response()->json(['error' => 'El usuario especificado no es funcionario'], 403);
+        }
+        if ($usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
+        }
         if (!$jaula) {
             return response()->json(['error' => 'La jaula especificada no existe'], 404);
         }
@@ -105,6 +111,12 @@ class AdminRegistroController extends Controller
         }
         if (!$jaula) {
             return response()->json(['error' => 'La jaula especificada no existe'], 404);
+        }
+        if ($usuario->roles !== "Funcionario") {
+            return response()->json(['error' => 'El usuario especificado no es funcionario'], 403);
+        }
+        if ($usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
 
         $rjaula = Rjaula::find($id);

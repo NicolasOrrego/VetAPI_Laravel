@@ -113,6 +113,9 @@ class ClientCitaController extends Controller
         if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
+        if ($cita->id_usuario != $usuario->id) {
+            return response()->json(['error' => 'No tienes permiso para modificar esta cita médica'], 403);
+        }
 
         $cita->update($validacion_datos);
         return response()->json(['message' => 'Cita médica modificada exitosamente', 'cita' => $cita], 200);

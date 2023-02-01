@@ -31,7 +31,10 @@ class AdminPacienteController extends Controller
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
         }
-        if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
+        if ($usuario->roles !== "Cliente") {
+            return response()->json(['error' => 'El usuario especificado no es cliente'], 403);
+        }
+        if ($usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
         $paciente = Paciente::create($paciente);
@@ -96,6 +99,12 @@ class AdminPacienteController extends Controller
         $usuario = User::find($request->id_usuario);
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
+        }
+        if ($usuario->roles !== "Cliente") {
+            return response()->json(['error' => 'El usuario especificado no es cliente'], 403);
+        }
+        if ($usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
         $paciente->update($validacion_datos);
         return response()->json(['message' => 'Paciente modificado exitosamente', 'paciente' => $paciente], 200);

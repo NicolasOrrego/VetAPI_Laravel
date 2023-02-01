@@ -21,6 +21,7 @@ class AdminCitaController extends Controller
             //! VALIDACIONES
             'fecha.required' => 'El campo de fecha es requerido.',
             'fecha.date_format' => 'El formato de fecha no es valido',
+            'hora.required' => 'El campo de hora es requerido.',
             'hora.date_format' => 'El formato de hora no es valida',
             'motivo.required' => 'El campo motivo es requerido',
             'id_usuario.required' => 'El campo usuario es requerido',
@@ -39,6 +40,12 @@ class AdminCitaController extends Controller
         $usuario = User::find($request->id_usuario);
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
+        }
+        if ($usuario->roles !== "Cliente") {
+            return response()->json(['error' => 'El usuario especificado no es cliente'], 403);
+        }
+        if ($usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
         $cita_medica = Cita::create($cita_medica);
         return response()->json([
@@ -83,7 +90,7 @@ class AdminCitaController extends Controller
     {
         $validacion_datos = $request->validate([
             'fecha' => 'required|date_format:Y-m-d',
-            'hora' => 'required|date_format:H:i',
+            'hora' => 'required|date_format:H:i|unique:users,id|',
             'motivo' => 'required|max:60|min:3',
             'id_usuario' => 'required|max:30|min:1'
         ], [
@@ -95,7 +102,9 @@ class AdminCitaController extends Controller
             'id_usuario.required' => 'El campo usuario es requerido',
         ]);
         $existe_cita = Cita::where('fecha', $request->fecha)
-            ->where('hora', $request->hora)->first();
+            ->where('hora', $request->hora)
+            ->where('id', '!=', $id)
+            ->first();
 
         if ($existe_cita) {
             return response()->json(['error' => 'La hora esta siendo ocupada'], 404);
@@ -108,6 +117,12 @@ class AdminCitaController extends Controller
         $usuario = User::find($request->id_usuario);
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
+        }
+        if ($usuario->roles !== "Cliente") {
+            return response()->json(['error' => 'El usuario especificado no es cliente'], 403);
+        }
+        if ($usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
 
         $cita->update($validacion_datos);
