@@ -144,10 +144,12 @@ class UsuarioController extends Controller
             'estado.required' => 'El campo estado requerido es requerido',
             'estado.in' => 'El estado seleccionado no es válido. Por favor seleccione entre Habilitado o Deshabilitado'
         ]);
+        
         $usuario = User::find($id);
         if (!$usuario) {
             return response()->json(['error' => 'El usuario no existe'], 404);
         }
+
         $validacion_datos['password'] = Hash::make($validacion_datos['password']);
         $usuario->update($validacion_datos);
         return response()->json(['message' => 'Usuario modificado exitosamente', 'usuario' => $usuario], 200);

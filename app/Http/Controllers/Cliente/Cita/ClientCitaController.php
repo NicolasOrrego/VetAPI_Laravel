@@ -30,12 +30,11 @@ class ClientCitaController extends Controller
         if ($existe_cita) {
             return response()->json(['error' => 'La hora esta siendo ocupada'], 404);
         }
-        if ($usuario->roles !== "Cliente") {
-            return response()->json(['error' => 'El usuario especificado no es cliente'], 404);
-        }
+
         if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
+
         $cita_medica = $validacion_datos;
         $cita_medica['fecha'] = $request->fecha;
         $cita_medica['hora'] = $request->hora;
@@ -103,16 +102,16 @@ class ClientCitaController extends Controller
         if ($existe_cita) {
             return response()->json(['error' => 'La hora esta siendo ocupada'], 404);
         }
+
         $cita = Cita::find($id);
         if (!$cita) {
             return response()->json(['error' => 'La cita especificada no existe'], 404);
         }
-        if ($usuario->roles !== "Cliente") {
-            return response()->json(['error' => 'El usuario especificado no es cliente'], 404);
-        }
+
         if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
+
         if ($cita->id_usuario != $usuario->id) {
             return response()->json(['error' => 'No tienes permiso para modificar esta cita médica'], 403);
         }

@@ -38,15 +38,19 @@ class AdminCitaController extends Controller
         $cita_medica['fecha'] = $request->fecha;
         $cita_medica['hora'] = $request->hora;
         $usuario = User::find($request->id_usuario);
+
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
         }
+
         if ($usuario->roles !== "Cliente") {
             return response()->json(['error' => 'El usuario especificado no es cliente'], 403);
         }
+
         if ($usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
+
         $cita_medica = Cita::create($cita_medica);
         return response()->json([
             'message' => 'Cita médica registrada exitosamente',
@@ -109,6 +113,7 @@ class AdminCitaController extends Controller
         if ($existe_cita) {
             return response()->json(['error' => 'La hora esta siendo ocupada'], 404);
         }
+
         $cita = Cita::find($id);
         if (!$cita) {
             return response()->json(['error' => 'La cita especificada no existe'], 404);
@@ -118,9 +123,11 @@ class AdminCitaController extends Controller
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
         }
+
         if ($usuario->roles !== "Cliente") {
             return response()->json(['error' => 'El usuario especificado no es cliente'], 403);
         }
+
         if ($usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }

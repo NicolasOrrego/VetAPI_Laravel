@@ -29,12 +29,15 @@ class AdminFichaController extends Controller
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
         }
+
         if (!$paciente) {
             return response()->json(['error' => 'El paciente especificado no existe'], 404);
         }
+
         if ($usuario->roles !== "Funcionario") {
             return response()->json(['error' => 'El usuario especificado no es funcionario'], 403);
         }
+
         if ($usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario funcionario seleccionado no se encuentra habilitado'], 403);
         }
@@ -91,18 +94,22 @@ class AdminFichaController extends Controller
             'id_paciente.required' => 'El campo id_paciente es requerido.',
             'receta.required' => 'El campo receta es requerido.'
         ]);
+        
         $usuario = User::find($request->id_usuario);
         $paciente = Paciente::find($request->id_paciente);
 
         if (!$usuario) {
             return response()->json(['error' => 'El usuario especificado no existe'], 404);
         }
+
         if (!$paciente) {
             return response()->json(['error' => 'El paciente especificado no existe'], 404);
         }
+
         if ($usuario->roles !== "Funcionario") {
             return response()->json(['error' => 'El usuario especificado no es funcionario'], 403);
         }
+        
         if ($usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario funcionario seleccionado no se encuentra habilitado'], 403);
         }

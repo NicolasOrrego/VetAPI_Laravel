@@ -29,9 +29,11 @@ class FunRegistroController extends Controller
         if ($usuario->roles !== "Funcionario" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'Solo los funcionarios que se encuentren habilitados pueden hacer registro de jaula'], 403);
         }
+
         if (!$paciente) {
             return response()->json(['error' => 'El paciente especificado no existe'], 404);
         }
+
         if (!$jaula) {
             return response()->json(['error' => 'La jaula especificada no existe'], 404);
         }
@@ -96,9 +98,11 @@ class FunRegistroController extends Controller
         if ($usuario->roles !== "Funcionario" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'Solo los funcionarios que se encuentren habilitados pueden hacer registro de jaula'], 403);
         }
+
         if (!$paciente) {
             return response()->json(['error' => 'El paciente especificado no existe'], 404);
         }
+
         if (!$jaula) {
             return response()->json(['error' => 'La jaula especificada no existe'], 404);
         }

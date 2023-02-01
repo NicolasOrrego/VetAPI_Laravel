@@ -16,6 +16,7 @@ use App\Http\Controllers\Funcionario\Paciente\FunPacienteController;
 use App\Http\Controllers\Administrador\CitaMedica\AdminCitaController;
 use App\Http\Controllers\Administrador\Paciente\AdminPacienteController;
 use App\Http\Controllers\Administrador\Registro\AdminRegistroController;
+use App\Http\Controllers\Funcionario\Usuario\FuncionarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,6 +164,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/v1/funcionario', function () {
             return response()->json(['message' => 'Bievenido Usuario Funcionario']);
         });
+
+        //TODO: Informacion personal
+        //* Ver informacion personal
+        Route::get('/v1/funcionario/informacion', [FuncionarioController::class, 'informacionPersonal']);
+
+        //* Modificar información personal
+        Route::put('/v1/funcionario/modificar/informacion', [FuncionarioController::class, 'modificarInformacion']);
+
+        //* Deshabilitar cuenta
+        Route::put('/v1/funcionario/deshabilitar/cuenta', [FuncionarioController::class, 'deshabilitarCuenta']);
 
         //TODO: Ficha Médica
         //* Registrar ficha médicas

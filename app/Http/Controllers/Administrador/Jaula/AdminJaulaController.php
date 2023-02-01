@@ -71,6 +71,7 @@ class AdminJaulaController extends Controller
             'dimensiones.required' => 'El campo dimension es requerido.',
             'material.required' => 'El campo material es requerido',
         ]);
+
         $jaula = Jaula::find($id);
         if (!$jaula) {
             return response()->json(['error' => 'La jaula no existe'], 404);

@@ -26,6 +26,7 @@ class FunFichaController extends Controller
         if (!$paciente) {
             return response()->json(['error' => 'El paciente especificado no existe'], 404);
         }
+        
         if ($usuario->roles !== "Funcionario" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'Solo los funcionarios que se encuentren habilitados pueden crear fichas médicas'], 403);
         }

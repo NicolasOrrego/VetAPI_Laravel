@@ -24,12 +24,11 @@ class ClientPacienteController extends Controller
         ]);
 
         $usuario = auth()->user();
-        if ($usuario->roles !== "Cliente") {
-            return response()->json(['error' => 'El usuario especificado no es cliente'], 404);
-        }
+
         if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
+
         $paciente = $validacion_datos;
         $paciente['id_usuario'] = $usuario->id;
         $paciente = Paciente::create($paciente);
@@ -72,8 +71,13 @@ class ClientPacienteController extends Controller
         if (!$paciente) {
             return response()->json(['error' => 'Paciente no encontrado'], 404);
         }
+        
         if ($paciente->id_usuario != $usuario->id) {
             return response()->json(['error' => 'No tienes permiso para modificar este paciente'], 403);
+        }
+
+        if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
+            return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
 
         $paciente->update($validacion_datos);

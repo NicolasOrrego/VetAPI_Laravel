@@ -30,9 +30,11 @@ class FunPacienteController extends Controller
         if ($usuario->roles !== "Cliente") {
             return response()->json(['error' => 'El usuario especificado no es cliente'], 404);
         }
+
         if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
+        
         $paciente = Paciente::create($paciente);
         return response()->json([
             'message' => 'Paciente registrado exitosamente',
@@ -92,13 +94,16 @@ class FunPacienteController extends Controller
         if (!$paciente) {
             return response()->json(['error' => 'El paciente no existe'], 404);
         }
+
         $usuario = User::find($request->id_usuario);
         if ($usuario->roles !== "Cliente") {
             return response()->json(['error' => 'El usuario especificado no es cliente'], 404);
         }
+
         if ($usuario->roles !== "Cliente" || $usuario->estado !== "Habilitado") {
             return response()->json(['error' => 'El usuario cliente seleccionado no se encuentra habilitado'], 403);
         }
+
         $paciente->update($validacion_datos);
         return response()->json(['message' => 'Paciente modificado exitosamente', 'paciente' => $paciente], 200);
     }
