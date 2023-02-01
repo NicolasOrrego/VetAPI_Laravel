@@ -1,4 +1,4 @@
-## Documentación del sistema VetAPI.
+## Documentación de VetAPI.
 
 *Bienvenido a VetAPI, una solución de API-REST que te permite administrar tu clínica veterinaria de manera eficiente y sencilla. Con VetAPI puedes almacenar toda la información importante sobre tus clientes,pacientes,citas y diagnosticos, todo en un mismo lugar.*
 
@@ -58,7 +58,136 @@
 > *Paciente:*
 > - *El registro de un paciente a nombre de un cliente solo es posible para los usuarios administrador y veterinario si el cliente correspondiente existe en la base de datos y su estado es habilitado. De lo contrario, el registro o actualización del paciente no será permitido. Por favor, asegúrese de cumplir estas condiciones antes de intentar registrar o actualizar un paciente.*
 > - *El registro de un nuevo paciente será asociado automáticamente con el identificador de usuario del cliente que lo registre, siempre y cuando se encuentre autenticado*
-> - *El cliente podrá visualizar todos los pacientes registrados a su nombre y realizar búsquedas específicas solo si se encuentra autenticado. Si intenta buscar un paciente que no pertenecen a su nombre, se le informará que el paciente buscado no está asociado a su usuario autenticado.*
+> - *El cliente podrá visualizar todos los pacientes registrados a su nombre solo si se encuentra autenticado.
 > - *El cliente podrá actualizar todas los pacientes registrados a su nombre solo si se encuentra autenticado. Si el usuario cliente intenta actualizar un paciente que no pertenecen a su nombre, se le informará que el paciente no está asociado a su usuario autenticado.*
+
+## Cómo implementar VetAPI.
+> *Clone este repositorio:*
+```
+https://github.com/NicolasOrrego/API_Veterinaria-Laravel_9.git
+```
+> *Instalación de dependencias.*
+```
+composer install
+```
+> *Instalación de paquetes NPM.*
+```
+npm install
+```
+> *Creamos el archivo .env*
+```
+ copy .env.example .env
+```
+> *Ejecución de migraciones*
+```
+ php artisan migrate
+```
+## Rutas de VetAPI.
+1. *Auntenticación*
+> - http://127.0.0.1:8000/api/v1/registrarse
+> - http://127.0.0.1:8000/api/v1/login
+> - http://127.0.0.1:8000/api/v1/logout
+
+2. *Administrador*
+> *Informacion personal*
+> - http://127.0.0.1:8000/api/v1/administrador
+> - http://127.0.0.1:8000/api/v1/administrador/informacion
+> - http://127.0.0.1:8000/api/v1/administrador/deshabilitar/cuenta
+
+> *CRUD usuario*
+> - http://127.0.0.1:8000/api/v1/administrador/registrar/usuario
+> - http://127.0.0.1:8000/api/v1/administrador/lista/usuarios
+> - http://127.0.0.1:8000/api/v1/administrador/lista/administradores/usuarios
+> - http://127.0.0.1:8000/api/v1/administrador/lista/funcionarios/usuarios
+> - http://127.0.0.1:8000/api/v1/administrador/lista/clientes/usuarios
+> - http://127.0.0.1:8000/api/v1/administrador/buscar/usuario/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/modificar/usuario/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/eliminar/usuario/{id}
+
+> *CRUD paciente*
+> - http://127.0.0.1:8000/api/v1/administrador/registrar/paciente
+> - http://127.0.0.1:8000/api/v1/administrador/lista/pacientes
+> - http://127.0.0.1:8000/api/v1/administrador/buscar/paciente/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/modificar/paciente/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/eliminar/paciente/{id}
+
+> *CRUD jaula*
+> - http://127.0.0.1:8000/api/v1/administrador/registrar/jaula
+> - http://127.0.0.1:8000/api/v1/administrador/lista/jaulas
+> - http://127.0.0.1:8000/api/v1/administrador/buscar/jaula/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/modificar/jaula/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/eliminar/jaula/{id}
+
+> *CRUD cita médica*
+> - http://127.0.0.1:8000/api/v1/administrador/registrar/cita
+> - http://127.0.0.1:8000/api/v1/administrador/lista/citas
+> - http://127.0.0.1:8000/api/v1/administrador/buscar/cita/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/modificar/cita/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/eliminar/cita/{id}
+
+> *CRUD ficha médica*
+> - http://127.0.0.1:8000/api/v1/administrador/registrar/ficha
+> - http://127.0.0.1:8000/api/v1/administrador/lista/fichas
+> - http://127.0.0.1:8000/api/v1/administrador/buscar/ficha/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/modificar/ficha/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/eliminar/ficha/{id}
+
+> *CRUD registro jaula*
+> - http://127.0.0.1:8000/api/v1/administrador/registrar/registro/jaula
+> - http://127.0.0.1:8000/api/v1/administrador/lista/registro/jaulas
+> - http://127.0.0.1:8000/api/v1/administrador/buscar/registro/jaula/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/modificar/registro/jaula/{id}
+> - http://127.0.0.1:8000/api/v1/administrador/eliminar/registro/jaula/{id}
+
+3. *Veterinario*
+> *Informacion personal*
+> - http://127.0.0.1:8000/api/v1/funcionario
+> - http://127.0.0.1:8000/api/v1/funcionario/informacion
+> - http://127.0.0.1:8000/api/v1/funcionario/deshabilitar/cuenta
+
+> *CRUD ficha médica*
+> - http://127.0.0.1:8000/api/v1/funcionario/registrar/ficha
+> - http://127.0.0.1:8000/api/v1/funcionario/lista/fichas
+> - http://127.0.0.1:8000/api/v1/funcionario/buscar/ficha/{id}
+> - http://127.0.0.1:8000/api/v1/funcionario/modificar/ficha/{id}
+> - http://127.0.0.1:8000/api/v1/funcionario/eliminar/ficha/{id}
+
+> *CRUD paciente*
+> - http://127.0.0.1:8000/api/v1/funcionario/registrar/paciente
+> - http://127.0.0.1:8000/api/v1/funcionario/lista/pacientes
+> - http://127.0.0.1:8000/api/v1/funcionario/buscar/paciente/{id}
+> - http://127.0.0.1:8000/api/v1/funcionario/modificar/paciente/{id}
+> - http://127.0.0.1:8000/api/v1/funcionario/eliminar/paciente/{id}
+
+> *CRUD registro jaula*
+> - http://127.0.0.1:8000/api/v1/funcionario/registrar/registro/jaula
+> - http://127.0.0.1:8000/api/v1/funcionario/lista/registro/jaulas
+> - http://127.0.0.1:8000/api/v1/funcionario/buscar/registro/jaula/{id}
+> - http://127.0.0.1:8000/api/v1/funcionario/modificar/registro/jaula/{id}
+> - http://127.0.0.1:8000/api/v1/funcionario/eliminar/registro/jaula/{id}
+
+4. *Cliente*
+> *Informacion personal*
+> - http://127.0.0.1:8000/api/v1/cliente
+> - http://127.0.0.1:8000/api/v1/cliente/informacion
+> - http://127.0.0.1:8000/api/v1/cliente/deshabilitar/cuenta
+
+> *Paciente*
+> - http://127.0.0.1:8000/api/v1/cliente/registrar/paciente
+> - http://127.0.0.1:8000/api/v1/cliente/lista/pacientes
+> - http://127.0.0.1:8000/api/v1/cliente/modificar/paciente/{id}
+
+> *CRUD cita médica*
+> - http://127.0.0.1:8000/api/v1/cliente/registrar/cita
+> - http://127.0.0.1:8000/api/v1/cliente/lista/citas
+> - http://127.0.0.1:8000/api/v1/cliente/buscar/cita/{id}
+> - http://127.0.0.1:8000/api/v1/cliente/modificar/cita/{id}
+> - http://127.0.0.1:8000/api/v1/cliente/eliminar/cita/{id}
+
+
+## Ejemplo de solicitud
+
+
+
 
 
