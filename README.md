@@ -39,7 +39,26 @@
 > - *Solo los usuarios clientes y administradores tienen permiso para registrar citas médicas. Si un usuario diferente intenta registrar una cita, recibirá un mensaje de error indicando que "El usuario especificado no es cliente.*
 
 > *Registros Médicos:*
-> - *El administrador solo podrá registrar un registro médico en nombre de un veterinario si este existe en la base de datos y su estado es habilitado. En caso contrario, si el veterinario no existe o su estado no es habilitado, el administrador no podrá registrar el registro médico. Para actualizar una cita médica, también se deben cumplir estas condiciones.*
+> - *El administrador solo podrá registrar un registro médico en nombre de un veterinario si este existe en la base de datos y su estado es habilitado. En caso contrario, si el veterinario no existe o su estado no es habilitado, el administrador no podrá registrar el registro médico. Para actualizar un registro médico, también se deben cumplir estas condiciones.*
+> - *Antes de crear un registro médico, asegúrese de que el paciente exista en la base de datos, de lo contrario no se permitirá llevar a cabo la creación.*
 > - *Solo los usuarios veterinario y administradores tienen permiso para registrar un registro médico. Si un usuario diferente intenta registrar un registro médico, recibirá un mensaje de error indicando que "El usuario especificado no es veterinario.*
+> - *El registro médico será asociado automáticamente con el identificador de usuario del veterinario que lo registre, siempre y cuando se encuentre autenticado.*
+> - *El veterinario podrá visualizar todos los registro médico registrados a su nombre y realizar búsquedas específicas solo si se encuentra autenticado. Si intenta buscar registro médico que no pertenecen a su nombre, se le informará que el registro médico buscado no está asociado a su usuario autenticado.*
+> - *El veterinario podrá actualizar todas los registro médico registrados a su nombre solo si se encuentra autenticado. Si el usuario veterinario intenta actualizar registro médico que no pertenecen a su nombre, se le informará que el registro médico no está asociado a su usuario autenticado.*
+
+> *Registros Jaula:*
+> - *El administrador solo podrá registrar un registro de jaula en nombre de un veterinario si este existe en la base de datos y su estado es habilitado. En caso contrario, si el veterinario no existe o su estado no es habilitado, el administrador no podrá registrar el registro de jaula. Para actualizar un registro de jaula, también se deben cumplir estas condiciones.*
+> - *Antes de crear un registro jaula, asegúrese de que el paciente exista en la base de datos, de lo contrario no se permitirá llevar a cabo la creación.*
+> - *Antes de crear un registro jaula, asegúrese de que la jaula exista en la base de datos, de lo contrario no se permitirá llevar a cabo la creación.*
+> - *Solo los usuarios veterinario y administradores tienen permiso para registrar un registro de jaula. Si un usuario diferente intenta registrar un registro de jaula, recibirá un mensaje de error indicando que "El usuario especificado no es veterinario.*
+> - *El registro de jaula será asociado automáticamente con el identificador de usuario del veterinario que lo registre, siempre y cuando se encuentre autenticado.*
+> - *El veterinario podrá visualizar todos los registro de jaula registrados a su nombre y realizar búsquedas específicas solo si se encuentra autenticado. Si intenta buscar un registro de jaula que no pertenecen a su nombre, se le informará que el registro de jaula buscado no está asociado a su usuario autenticado.*
+> - *El veterinario podrá actualizar todas los registro de jaula registrados a su nombre solo si se encuentra autenticado. Si el usuario veterinario intenta actualizar un registro de jaula que no pertenecen a su nombre, se le informará que el registro de jaula no está asociado a su usuario autenticado.*
+
+> *Paciente:*
+> - *El registro de un paciente a nombre de un cliente solo es posible para los usuarios administrador y veterinario si el cliente correspondiente existe en la base de datos y su estado es habilitado. De lo contrario, el registro o actualización del paciente no será permitido. Por favor, asegúrese de cumplir estas condiciones antes de intentar registrar o actualizar un paciente.*
+> - *El registro de un nuevo paciente será asociado automáticamente con el identificador de usuario del cliente que lo registre, siempre y cuando se encuentre autenticado*
+> - *El cliente podrá visualizar todos los pacientes registrados a su nombre y realizar búsquedas específicas solo si se encuentra autenticado. Si intenta buscar un paciente que no pertenecen a su nombre, se le informará que el paciente buscado no está asociado a su usuario autenticado.*
+> - *El cliente podrá actualizar todas los pacientes registrados a su nombre solo si se encuentra autenticado. Si el usuario cliente intenta actualizar un paciente que no pertenecen a su nombre, se le informará que el paciente no está asociado a su usuario autenticado.*
 
 
