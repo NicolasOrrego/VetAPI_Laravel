@@ -183,11 +183,3 @@ npm install
 > - http://127.0.0.1:8000/api/v1/cliente/buscar/cita/{id}
 > - http://127.0.0.1:8000/api/v1/cliente/modificar/cita/{id}
 > - http://127.0.0.1:8000/api/v1/cliente/eliminar/cita/{id}
-
-
-## Ejemplo de solicitud
-
-
-
-
-
